@@ -1,0 +1,8 @@
+{
+  "name": "Just Calories",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react",
+  "id": "2bf3461c"
+}
