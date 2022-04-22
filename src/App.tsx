@@ -1,3 +1,6 @@
+// Copyright 2022 Payton Quinn
+// SPDX-License-Identifier: GPL-3.0-only
+
 import { Redirect, Route } from 'react-router-dom';
 import {
   IonApp,
@@ -7,13 +10,11 @@ import {
   IonTabBar,
   IonTabButton,
   IonTabs,
-  setupIonicReact
-} from '@ionic/react';
+  setupIonicReact} from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { ellipse, square, triangle } from 'ionicons/icons';
-import Tab1 from './pages/Tab1';
-import Tab2 from './pages/Tab2';
-import Tab3 from './pages/Tab3';
+import { cogOutline, restaurantOutline } from 'ionicons/icons';
+import Calories from './pages/Calories';
+import Settings from './pages/Settings';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -33,44 +34,78 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import React, { useState } from 'react';
+import MaxCal from './pages/MaxCal';
+import AddCal from './pages/AddCal';
+import About from './pages/About';
+import License from './pages/License';
+import ThirdParty from './pages/ThirdParty';
 
 setupIonicReact();
 
-const App: React.FC = () => (
-  <IonApp>
-    <IonReactRouter>
-      <IonTabs>
-        <IonRouterOutlet>
-          <Route exact path="/tab1">
-            <Tab1 />
-          </Route>
-          <Route exact path="/tab2">
-            <Tab2 />
-          </Route>
-          <Route path="/tab3">
-            <Tab3 />
-          </Route>
-          <Route exact path="/">
-            <Redirect to="/tab1" />
-          </Route>
-        </IonRouterOutlet>
-        <IonTabBar slot="bottom">
-          <IonTabButton tab="tab1" href="/tab1">
-            <IonIcon icon={triangle} />
-            <IonLabel>Tab 1</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="tab2" href="/tab2">
-            <IonIcon icon={ellipse} />
-            <IonLabel>Tab 2</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="tab3" href="/tab3">
-            <IonIcon icon={square} />
-            <IonLabel>Tab 3</IonLabel>
-          </IonTabButton>
-        </IonTabBar>
-      </IonTabs>
-    </IonReactRouter>
-  </IonApp>
-);
+export const maxCalKey = "MAX_CAL";
+export const curCalKey = "CUR_CAL";
+
+export interface MaxValProps {
+  maxValue: number;
+  setMaxValue: React.Dispatch<React.SetStateAction<number>>;
+}
+
+export interface CurValProps {
+  curValue: number;
+  setCurValue: React.Dispatch<React.SetStateAction<number>>;
+}
+
+
+const App: React.FC = () => {
+
+  const [ maxValue, setMaxValue ] = useState<number>(0);
+  const [ curValue, setCurValue ] = useState<number>(0);
+
+  return (
+    <IonApp>
+      <IonReactRouter>
+        <IonTabs>
+          <IonRouterOutlet>
+            <Route exact path="/calories">
+              <Calories maxValue={maxValue} setMaxValue={setMaxValue} curValue={curValue} setCurValue={setCurValue}/>
+            </Route>
+            <Route exact path="/settings">
+              <Settings />
+            </Route>
+            <Route exact path="/maxcal">
+              <MaxCal maxValue={maxValue} setMaxValue={setMaxValue} />
+            </Route>
+            <Route exact path="/addcal">
+              <AddCal curValue={curValue} setCurValue={setCurValue} />
+            </Route>
+            <Route exact path="/about">
+              <About />
+            </Route>
+            <Route exact path="/license">
+              <License />
+            </Route>
+            <Route exact path="/thirdparty">
+              <ThirdParty />
+            </Route>
+            <Route exact path="/">
+              <Redirect to="/calories" />
+            </Route>
+          </IonRouterOutlet>
+          <IonTabBar slot="bottom">
+            <IonTabButton tab="calories" href="/calories">
+              <IonIcon icon={restaurantOutline} />
+              <IonLabel>Calories</IonLabel>
+            </IonTabButton>
+            <IonTabButton tab="settings" href="/settings">
+              <IonIcon icon={cogOutline} />
+              <IonLabel>Settings</IonLabel>
+            </IonTabButton>
+          </IonTabBar>
+        </IonTabs>
+      </IonReactRouter>
+    </IonApp>
+  )
+};
 
 export default App;

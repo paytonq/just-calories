@@ -1,3 +1,6 @@
+// Copyright 2022 Payton Quinn
+// SPDX-License-Identifier: GPL-3.0-only
+
 // jest-dom adds custom jest matchers for asserting on DOM nodes.
 // allows you to do things like:
 // expect(element).toHaveTextContent(/react/i)

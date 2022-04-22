@@ -1,0 +1,12 @@
+/* Copyright 2022 Payton Quinn
+   SPDX-License-Identifier: GPL-3.0-only */
+
+br{
+  content: "";
+  display: block;
+  margin: 1.1em;
+}
+
+hr{
+  margin: 3em;
+}

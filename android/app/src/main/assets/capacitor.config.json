@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "Just Calories",
+	"webDir": "build",
+	"bundledWebRuntime": false
+}
