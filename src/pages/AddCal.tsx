@@ -65,7 +65,7 @@ const AddCal: React.FC<CurValProps> = (props: CurValProps) => {
               placeholder="Number of calories to add" 
               onIonChange={(e) => e.detail.value && setAddValue(e.detail.value)} 
             />
-            <IonButton type="submit">Add</IonButton>
+            <IonButton type="submit">Add Calories</IonButton>
           </form>
         </IonItem>
       </IonContent>

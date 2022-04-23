@@ -12,6 +12,7 @@ import {
   IonTabs,
   setupIonicReact} from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
+import { Storage } from '@ionic/storage';
 import { cogOutline, restaurantOutline } from 'ionicons/icons';
 import Calories from './pages/Calories';
 import Settings from './pages/Settings';
@@ -34,17 +35,19 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import MaxCal from './pages/MaxCal';
 import AddCal from './pages/AddCal';
 import About from './pages/About';
 import License from './pages/License';
 import ThirdParty from './pages/ThirdParty';
+import { initalizeStorage } from './storageUtils';
 
 setupIonicReact();
 
 export const maxCalKey = "MAX_CAL";
 export const curCalKey = "CUR_CAL";
+export const curDateKey = "CUR_DATE";
 
 export interface MaxValProps {
   maxValue: number;
@@ -61,6 +64,21 @@ const App: React.FC = () => {
 
   const [ maxValue, setMaxValue ] = useState<number>(0);
   const [ curValue, setCurValue ] = useState<number>(0);
+  
+  const [ myDB, setMyDB ] = useState<Storage>();
+  useEffect(() => initalizeStorage(myDB, setMyDB), [myDB]);
+  const dateOnOpen = new Date();
+  if (myDB) {
+    myDB.get(curDateKey).then((curDate: Date) => {
+        if(!curDate || dateOnOpen.getFullYear() !== curDate.getFullYear() ||
+          dateOnOpen.getMonth() !== curDate.getMonth() ||
+          dateOnOpen.getDay() !== curDate.getDay()) {
+            myDB.set(curDateKey, dateOnOpen).then(() => {
+              setCurValue(0);
+            })
+        }
+    })
+  }
 
   return (
     <IonApp>

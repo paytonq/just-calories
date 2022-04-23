@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: GPL-3.0-only
 
 import { IonContent, IonFab, IonFabButton, IonIcon, IonPage } from '@ionic/react';
-import { buildStyles, CircularProgressbar } from 'react-circular-progressbar';
+import { CircularProgressbar } from 'react-circular-progressbar';
 import { Storage } from '@ionic/storage';
 import './Calories.css';
 import 'react-circular-progressbar/dist/styles.css';
@@ -40,14 +40,13 @@ const Calories: React.FC<MaxValProps & CurValProps> = (props: MaxValProps & CurV
   return (
     <IonPage>
       <IonContent className="loading-container">
-          { props.curValue && props.maxValue 
-          ? <CircularProgressbar   
-            styles={buildStyles({textSize: "2vh"})}
+          { props.curValue !== null && props.curValue !== undefined && props.maxValue 
+          ? <CircularProgressbar
             className="svg-element" 
             value={props.curValue} 
             maxValue={props.maxValue} 
             text={props.maxValue ? `${props.curValue} / ${props.maxValue}` : "Error" } />
-          : <span>Set maximum calories in settings.</span>}
+          : <span className="notice-text">Set maximum calories in settings.</span>}
           <IonFab horizontal="end" vertical="bottom" slot="fixed">
             <IonFabButton routerLink="/addcal">
               <IonIcon icon={add} />
