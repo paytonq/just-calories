@@ -42,7 +42,7 @@ const Calories: React.FC<MaxValProps & CurValProps> = (props: MaxValProps & CurV
       <IonContent className="loading-container">
           { props.curValue && props.maxValue 
           ? <CircularProgressbar   
-            styles={buildStyles({textSize: "3vw"})}
+            styles={buildStyles({textSize: "2vh"})}
             className="svg-element" 
             value={props.curValue} 
             maxValue={props.maxValue} 
