@@ -1,5 +1,5 @@
 {
-	"appId": "io.ionic.starter",
+	"appId": "com.paytonq.justcalories",
 	"appName": "Just Calories",
 	"webDir": "build",
 	"bundledWebRuntime": false

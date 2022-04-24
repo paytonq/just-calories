@@ -1,4 +1,4 @@
-package io.ionic.starter;
+package com.paytonq.justcalories;
 
 import com.getcapacitor.BridgeActivity;
 
