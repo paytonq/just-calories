@@ -67,7 +67,7 @@ const App: React.FC = () => {
   
   const [ myDB, setMyDB ] = useState<Storage>();
   useEffect(() => initalizeStorage(myDB, setMyDB), [myDB]);
-  const dateOnOpen = new Date("2022-04-26T01:11:33.020Z");
+  const dateOnOpen = new Date();
   if (myDB) {
     myDB.get(curDateKey).then((curDate: Date) => {
         if(!curDate || dateOnOpen.getFullYear() !== curDate.getFullYear() ||
